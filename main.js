@@ -57,6 +57,7 @@ const timerContainer = function () {
     document.querySelector(".time-left").insertAdjacentHTML("beforeend", html);
 
     if (seconds === 0) {
+      changeQuestion(valueOfCard);
       clearInterval(timer);
     }
   };
