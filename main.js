@@ -43,6 +43,10 @@ let highScore = 0;
 
 let highscoreStorage;
 
+let answerArray = [];
+
+let num1, num2, num3, num4;
+
 //Required functions
 
 // Executing the timer function of 20second countdown
@@ -191,10 +195,10 @@ const generateHtml = function (data) {
   <div class="main-section">
     <p class="question">${nextClick + 1}.${data.results[0].question}</p>
 
-    <p class="answer answer-1">${data.results[0].correct_answer}</p>
-    <p class="answer answer-2">${data.results[0].incorrect_answers[0]}</p>
-    <p class="answer answer-3">${data.results[0].incorrect_answers[1]}</p>
-    <p class="answer answer-4">${data.results[0].incorrect_answers[2]}</p>
+    <p class="answer answer-1">${answerArray[num1]}</p>
+    <p class="answer answer-2">${answerArray[num2]}</p>
+    <p class="answer answer-3">${answerArray[num3]}</p>
+    <p class="answer answer-4">${answerArray[num4]}</p>
   </div>
 
   <div class="bottom-section">
@@ -215,11 +219,19 @@ const getAPi = async function (value) {
 
   const data = await repsonse.json();
 
+  answerArray = [
+    data.results[0].incorrect_answers[0],
+    data.results[0].correct_answer,
+    data.results[0].incorrect_answers[1],
+    data.results[0].incorrect_answers[2],
+  ];
+
   console.log(data);
 
   generateHtml(data);
 
   correct_answer = data.results[0].correct_answer;
+
   answerchecker();
 
   //clearing the existing timer if exist bcz if we login in different accounts simanteosuly then 2 timers runs at same time
@@ -403,3 +415,14 @@ const getData = function () {
 
   generateHighscore();
 };
+
+const randomize = function () {
+  num1 = Math.trunc(Math.random() * 1);
+  num2 = Math.trunc(Math.random() * 2) + 1;
+  num3 = Math.trunc(Math.random() * 3) + 1;
+  num4 = Math.trunc(Math.random() * 3) + 1;
+
+  console.log(num1, num2, num3, num4);
+};
+
+randomize();
