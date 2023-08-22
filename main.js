@@ -298,15 +298,24 @@ const answerchecker = function () {
         playRightAudio();
         pauseTimeAudio();
         target.style.border = "2px solid green";
-        nextFeature();
+        // nextFeature();
         score++;
         clearInterval(timer);
+        setTimeout(function () {
+          changeQuestion(valueOfCard);
+        }, 1500);
       }
       if (target.textContent !== correct_answer) {
         playWrongAudio();
         pauseTimeAudio();
         target.style.border = "2px solid red";
-        nextFeature();
+        // nextFeature();
+
+        //First the auido plays for 1.5sec and then the question chnages
+
+        setTimeout(function () {
+          changeQuestion(valueOfCard);
+        }, 1500);
         clearInterval(timer);
       }
 
@@ -331,6 +340,8 @@ const changeQuestion = function (value) {
   } else {
     getAPi(value);
     nextClick++;
+    pauseRightAudio();
+    pauseWrongAudio();
     playTimeAudio();
   }
 };
@@ -416,6 +427,8 @@ const getData = function () {
 
   generateHighscore();
 };
+
+//Randomising the answer
 
 const randomize = function (array) {
   for (let i = array.length - 1; i > 0; i--) {
