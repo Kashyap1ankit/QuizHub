@@ -195,10 +195,10 @@ const generateHtml = function (data) {
   <div class="main-section">
     <p class="question">${nextClick + 1}.${data.results[0].question}</p>
 
-    <p class="answer answer-1">${answerArray[num1]}</p>
-    <p class="answer answer-2">${answerArray[num2]}</p>
-    <p class="answer answer-3">${answerArray[num3]}</p>
-    <p class="answer answer-4">${answerArray[num4]}</p>
+    <p class="answer answer-1">${answerArray[0]}</p>
+    <p class="answer answer-2">${answerArray[1]}</p>
+    <p class="answer answer-3">${answerArray[2]}</p>
+    <p class="answer answer-4">${answerArray[3]}</p>
   </div>
 
   <div class="bottom-section">
@@ -226,6 +226,7 @@ const getAPi = async function (value) {
     data.results[0].incorrect_answers[2],
   ];
 
+  randomize(answerArray);
   console.log(data);
 
   generateHtml(data);
@@ -416,13 +417,15 @@ const getData = function () {
   generateHighscore();
 };
 
-const randomize = function () {
-  num1 = Math.trunc(Math.random() * 1);
-  num2 = Math.trunc(Math.random() * 2) + 1;
-  num3 = Math.trunc(Math.random() * 3) + 1;
-  num4 = Math.trunc(Math.random() * 3) + 1;
+const randomize = function (array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    // Generate random number
+    let j = Math.floor(Math.random() * (i + 1));
 
-  console.log(num1, num2, num3, num4);
+    let temp = array[i];
+    array[i] = array[j];
+    array[j] = temp;
+  }
+
+  return array;
 };
-
-randomize();
