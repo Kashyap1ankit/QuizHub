@@ -421,7 +421,7 @@ const storeData = function () {
 const getData = function () {
   const data = JSON.parse(localStorage.getItem("high"));
 
-  if (!high) return;
+  if (!data) return;
 
   highScore = data;
 
