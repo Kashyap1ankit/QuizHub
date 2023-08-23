@@ -415,13 +415,13 @@ const highscoreMusic = function () {
 //Storing the highscore in the localstorage
 
 const storeData = function () {
-  localStorage.setItem("data", JSON.stringify(highscoreStorage));
+  localStorage.setItem("high", JSON.stringify(highscoreStorage));
 };
 
 const getData = function () {
-  const data = JSON.parse(localStorage.getItem("data"));
+  const data = JSON.parse(localStorage.getItem("high"));
 
-  if (!data) return;
+  if (!high) return;
 
   highScore = data;
 
